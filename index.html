@@ -165,11 +165,19 @@
             }
         }
 
-        var circles = [];
+        var shapes = [];
 
         // function that detect a key press
         function onKeyDown(event) {
-        	if (keyData[event.key]) {
+        	if (event.key === 'a') {
+        		// generate random point
+	            var maxPoint = new Point(view.size.width, view.size.height);
+	            var randomPoint = Point.random();
+	            var point = maxPoint * randomPoint;
+	            var newCircle = new Path.Circle(point, 300);
+	        	newCircle.fillColor = keyData[event.key].color;
+	        	keyData[event.key].sound.play();
+        	} else {
         		// generate random point
 	            var maxPoint = new Point(view.size.width, view.size.height);
 	            var randomPoint = Point.random();
@@ -179,20 +187,20 @@
 	        	keyData[event.key].sound.play();
         	}
 
-            // add a new circle to the circles array to draw
-            circles.push(newCircle);
+            // add a new circle to the shapes array to draw
+            shapes.push(newCircle);
         }
         
         function onFrame(event) {
         	// animate the hue and the scale of circles
-        	for (var i = 0; i < circles.length; i++) {
-        		circles[i].fillColor.hue +=1;
-        		circles[i].scale(.9);
+        	for (var i = 0; i < shapes.length; i++) {
+        		shapes[i].fillColor.hue +=1;
+        		shapes[i].scale(.9);
                 // delete the dimished circles from the array
-                if(circles[i].area < 1){
-                  circles[i].remove();
-                  circles.splice(i, 1);
-                  console.log(circles);
+                if(shapes[i].area < 1){
+                  shapes[i].remove();
+                  shapes.splice(i, 1);
+                  console.log(shapes);
                 }
         	}
         }
