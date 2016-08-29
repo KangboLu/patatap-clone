@@ -170,13 +170,20 @@
         // function that detect a key press
         function onKeyDown(event) {
         	if (keyData[event.key]) {
-        		// generate random point
+                    // generate random point
 	            var maxPoint = new Point(view.size.width, view.size.height);
 	            var randomPoint = Point.random();
 	            var point = maxPoint * randomPoint;
 	            var newCircle = new Path.Circle(point, 300);
 	        	newCircle.fillColor = keyData[event.key].color;
 	        	keyData[event.key].sound.play();
+        	} else {
+        	    var maxPoint = new Point(view.size.width, view.size.height);
+	            var randomPoint = Point.random();
+	            var point = maxPoint * randomPoint;
+	            var newCircle = new Path.Circle(point, 300);
+	        	newCircle.fillColor = "#F44336";
+	        	keyData["a"].sound.play();	
         	}
 
             // add a new circle to the circles array to draw
